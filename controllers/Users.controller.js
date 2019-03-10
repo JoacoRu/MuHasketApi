@@ -23,7 +23,7 @@ class UsersController {
     }
 
     async update(req, res) {
-        let userId = req.body.memb___id;
+        let userId = req.params.memb___id;
         let payload = {
             memb__pwd: req.body.memb__pwd,
             memb_name: req.body.memb_name,

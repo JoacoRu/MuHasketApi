@@ -10,6 +10,6 @@ app.use(bodyParser.urlencoded());
 app.use( bodyParser.json());
 app.use('/', require('./routes'));
 
-app.listen(3001, 'localhost', () => {
-    console.log('Server running at http://localhost:3001/');
+app.listen(config.server.port, config.server.host, () => {
+    console.log(`Server running at http://${config.server.host}:${config.server.port}/`);
 })

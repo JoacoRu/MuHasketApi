@@ -2,7 +2,9 @@ const UserModel = require('../models/MEMB_INFO');
 
 class UsersService {
     get(userId) {
-        return UserModel.findById(userId);
+        return UserModel.findOne({
+            where: {'memb___id': userId}
+        });
     }
 
     list(search = {}) {
@@ -21,13 +23,13 @@ class UsersService {
     update(userId, payload = {}) {
         return UserModel.update(
             payload,
-            {where: {memb___id: userId}}
-        );
+            {where: {memb___id: userId}
+        });
     }
 
     delete(userId) {
         return UserModel.destroy({
-            where: {memb_guid: userId}
+            where: {memb___id: userId}
         });
     }
 }

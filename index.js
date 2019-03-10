@@ -1,14 +1,15 @@
+'use strict'
+
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const db = require('./db.init');
+const cors = require('cors');
+const config = require('./config');
+const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded());
+app.use( bodyParser.json());
 app.use('/', require('./routes'));
 
-app.listen(3001, () => {
-    console.log('Server working at localhost:3001');
+app.listen(3001, 'localhost', () => {
+    console.log('Server running at http://localhost:3001/');
 })

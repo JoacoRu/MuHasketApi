@@ -14,7 +14,7 @@ routes.delete('/users/:userId', usersController.delete.bind(usersController));
 
 //Personajes
 routes.get('/characters/:userId', characterControllerClass.get.bind(characterControllerClass));
-routes.get('/characters/', characterControllerClass.list.bind(characterControllerClass));
+routes.get('/characters', characterControllerClass.list.bind(characterControllerClass));
 routes.get('/charactersByPj/:pjId', characterControllerClass.getByPj.bind(characterControllerClass));
 routes.put('/characters/:pjId', characterControllerClass.update.bind(characterControllerClass));
 routes.delete('/characters/:pjId', characterControllerClass.delete.bind(characterControllerClass));

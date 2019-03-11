@@ -1,24 +1,46 @@
 const CharactersService = require('../services/characters.services');
+const pass = require('../config/index');
 const charactersService = new CharactersService();
 
 class CharactersController {
     async get(req, res) {
         let userId = req.params.userId;
-        let response = await charactersService.get(userId)
+        let pwd = req.body.pass;
+        if(pwd !== pass.privateKey.key) {
+            return res.status(500).send({
+                'message': 'Bad Credentials',
+                'status': 500
+            });    
+        }
+        let response = await charactersService.get(userId, pwd)
         .catch(e => e);
         return res.json(response);
     }
 
     async getByPj(req, res) {
         let pjId = req.params.pjId;
-        let response = await charactersService.getByPj(pjId)
+        let pwd = req.body.pass;
+        if(pwd !== pass.privateKey.key) {
+            return res.status(500).send({
+                'message': 'Bad Credentials',
+                'status': 500
+            });    
+        }
+        let response = await charactersService.getByPj(pjId, pwd)
         .catch(e => e);
         return res.json(response);
     }
 
     async list(req, res) {
         let search = req.params.search;
-        let response = await charactersService.list(search)
+        let pwd = req.body.pass;
+        if(pwd !== pass.privateKey.key) {
+            return res.status(500).send({
+                'message': 'Bad Credentials',
+                'status': 500
+            });    
+        }
+        let response = await charactersService.list(search, pwd)
         .catch(e => e);
         return res.json(response);
     }
@@ -26,7 +48,7 @@ class CharactersController {
     async update(req, res) {
         let pjId = req.params.pjId;
         let payload = {
-            Name: req.body.Name,
+            Name: pjId,
             cLevel: req.body.cLevel,
             LevelUpPoint: req.body.LevelUpPoint,
             Experience: req.body.Experience,
@@ -50,6 +72,13 @@ class CharactersController {
             LoseDuels: req.body.LoseDuels,
             Grand_Resets: req.body.Grand_Resets
         };
+        let pwd = req.body.pass;
+        if(pwd !== pass.privateKey.key) {
+            return res.status(500).send({
+                'message': 'Bad Credentials',
+                'status': 500
+            });    
+        }
         let response = await charactersService.update(pjId, payload)
         .catch(e => e);
         return res.json(response);
@@ -57,7 +86,14 @@ class CharactersController {
 
     async delete(req, res) {
         let pjId = req.params.pjId
-        let response = await charactersService.delete(pjId)
+        let pwd = req.body.pass;
+        if(pwd !== pass.privateKey.key) {
+            return res.status(500).send({
+                'message': 'Bad Credentials',
+                'status': 500
+            });    
+        }
+        let response = await charactersService.delete(pjId, pwd)
         .catch(e => e);
 
         return res.json(response);

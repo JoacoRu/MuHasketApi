@@ -3,16 +3,9 @@ const pass = require('../config/index');
 const charactersService = new CharactersService();
 
 class CharactersController {
-    async get(req, res) {
+    async listAccount(req, res) {
         let userId = req.params.userId;
-        let pwd = req.body.pass;
-        if(pwd !== pass.privateKey.key) {
-            return res.status(500).send({
-                'message': 'Bad Credentials',
-                'status': 500
-            });    
-        }
-        let response = await charactersService.get(userId, pwd)
+        let response = await charactersService.get(userId)
         .catch(e => e);
         return res.json(response);
     }

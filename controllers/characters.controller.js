@@ -12,7 +12,7 @@ class CharactersController {
 
     async getByPj(req, res) {
         let pjId = req.params.pjId;
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',
@@ -26,7 +26,7 @@ class CharactersController {
 
     async list(req, res) {
         let search = req.params.search;
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',
@@ -65,11 +65,12 @@ class CharactersController {
             LoseDuels: req.body.LoseDuels,
             Grand_Resets: req.body.Grand_Resets
         };
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',
-                'status': 500
+                'status': 500,
+                'ip': `this ip it's not allowe ${pwd}`
             });    
         }
         let response = await charactersService.update(pjId, payload)
@@ -79,7 +80,7 @@ class CharactersController {
 
     async delete(req, res) {
         let pjId = req.params.pjId
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',

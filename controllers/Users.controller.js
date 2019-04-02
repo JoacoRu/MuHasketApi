@@ -5,7 +5,7 @@ const userServices = new UserServicesClass();
 class UsersController {
      async get(req, res) {
         let userId = req.params.userId;
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',
@@ -18,7 +18,7 @@ class UsersController {
     }
 
     async list(req, res) {
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',
@@ -32,7 +32,7 @@ class UsersController {
 
     async create(req, res) {
         let payload = req.body;
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',
@@ -46,7 +46,7 @@ class UsersController {
 
     async update(req, res) {
         let userId = req.params.memb___id;
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',
@@ -66,7 +66,7 @@ class UsersController {
 
     async delete(req, res) {
         let userId = req.params.userId;
-        let pwd = req.body.pass;
+        let pwd = req.connection.remoteAddress;
         if(pwd !== pass.privateKey.key) {
             return res.status(500).send({
                 'message': 'Bad Credentials',
